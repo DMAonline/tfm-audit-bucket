@@ -3,6 +3,8 @@ Terraform module for defining an AWS S3 bucket with bucket policy and lifecycle 
 
 ## Using the module
 
+Note: It is best to specify the release or tag of the module to use, ensuring consistency and module API expectations.
+
 ```[hcl]
 module "aws_audit_bucket" {
     source = "github.com/DMAonline/tfm-audit-bucket"
