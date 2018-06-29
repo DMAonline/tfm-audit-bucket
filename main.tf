@@ -101,7 +101,6 @@ data "aws_iam_policy_document" "s3_audit_policy" {
 }
 
 resource "aws_s3_bucket_policy" "ct_audit_bucket_policy" {
-  provider = "aws.logging"
-  bucket   = "${aws_s3_bucket.audit.id}"
-  policy   = "${data.aws_iam_policy_document.s3_audit_policy.json}"
+  bucket = "${aws_s3_bucket.audit.id}"
+  policy = "${data.aws_iam_policy_document.s3_audit_policy.json}"
 }
