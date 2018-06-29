@@ -1,5 +1,5 @@
 # Terraform Module - AWS Cloudtrail Audit Bucket
-Terraform module for defining an AWS S3 bucket with bucket policy and lifecycle rules for storing CloudTrail Audit logs.
+Terraform module for defining an encrypted AWS S3 bucket with bucket policy and lifecycle rules for storing CloudTrail Audit logs.
 
 ## Using the module
 
@@ -49,3 +49,4 @@ module "aws_audit_bucket" {
 | --- | --- |
 | bucket_id | ID of the S3 audit bucket |
 | bucket_arn | ARN of the S3 audit bucket |
+| kms_key_arn | ARN of the KMS key used to encrypt the bucket |
