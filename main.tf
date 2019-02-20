@@ -98,6 +98,42 @@ data "aws_iam_policy_document" "s3_audit_policy" {
       values   = ["bucket-owner-full-control"]
     }
   }
+
+  statement {
+    sid = "AWSConfigAclCheck"
+
+    principals {
+      type        = "Service"
+      identifiers = ["config.amazonaws.com"]
+    }
+
+    actions = [
+      "s3:GetBucketAcl",
+    ]
+
+    resources = [
+      "${aws_s3_bucket.audit.arn}",
+    ]
+  }
+
+  statement {
+    sid = "AWSConfigWrite"
+
+    principals {
+      type        = "Service"
+      identifiers = ["config.amazonaws.com"]
+    }
+
+    actions = ["s3:PutObject"]
+
+    resources = ["${formatlist("%s/AWSLogs/%s/*", aws_s3_bucket.audit.arn, var.ct_account_id_list)}"]
+
+    condition = {
+      test     = "StringEquals"
+      variable = "s3:x-amz-acl"
+      values   = ["bucket-owner-full-control"]
+    }
+  }
 }
 
 resource "aws_s3_bucket_policy" "ct_audit_bucket_policy" {
